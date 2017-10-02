@@ -31,7 +31,7 @@ The following environment variables can influence the default configuration:
 ## Running the container
 ```
 docker-compose pull
-docker-compose up
+docker-compose --project-name divolte up
 ```
 
 ## Testing
@@ -81,4 +81,13 @@ If you still have the console consumer running you should see the avro encoded m
                                            ??V0:j4it1gyt:k3Ch09eSqfZLxs9si86U8iw_ANxUimkqV0:j4it1gyt:JqUiAcIiYjNv7rpK4GvjUR0a1bxgA4LjD0:1npO4TIYAVmC6Tb2L4Edpf~32KmcMDGNbannerClick?Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36
                                                                Chrome
                                                                      ChromeGoogle Inc.Browser59.0.3071.104"Personal computeOS X10.12.5(Apple Computer, Inc.
+```
+
+## Kerberos
+
+If you want to have a kerberozed kafka cluster use the docker-compose-kerberos file to spin up the images.
+You need to provide the projectname `divolte` for it to work
+
+```
+docker-compose --project-name divolte -f docker-compose-kerberos.yml up
 ```

@@ -1,0 +1,80 @@
+version: "3.3"
+services:
+  # Kafka/Zookeeper container
+  docker-kdc:
+    image: docker-kdc
+    container_name: docker-kdc
+    hostname: docker-kdc
+    domainname: divolte_divolte.io
+    environment:
+      REALM: EXAMPLE.COM
+      SUPPORTED_ENCRYPTION_TYPES: aes256-cts-hmac-sha1-96:normal
+      KADMIN_PRINCIPAL: kadmin/admin
+      KADMIN_PASSWORD: MITiys4K5
+    volumes:
+      # This is needed otherwise there won't be enough entropy to generate a new kerberos realm
+      - /dev/urandom:/dev/random
+    networks:
+      - divolte.io
+  divolte-kafka:
+    # image: krisgeus/docker-kafka
+    image: docker-kafka
+    container_name: divolte-kafka
+    hostname: divolte-kafka
+    domainname: divolte_divolte.io
+    environment:
+      ENABLE_KERBEROS: "true"
+      REALM: EXAMPLE.COM
+      KADMIN_PRINCIPAL: kadmin/admin
+      KADMIN_PASSWORD: MITiys4K5
+      KDC_HOST: docker-kdc
+      ADVERTISED_HOST: divolte-kafka
+      LOG_RETENTION_HOURS: 1
+      AUTO_CREATE_TOPICS: "false"
+      KAFKA_CREATE_TOPICS: divolte:4:1
+      ADVERTISED_LISTENERS: SASL_PLAINTEXT://divolte-kafka:9092,INTERNAL://localhost:9093
+      LISTENERS: SASL_PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
+      SECURITY_PROTOCOL_MAP: SASL_PLAINTEXT:SASL_PLAINTEXT,INTERNAL:PLAINTEXT
+      INTER_BROKER: INTERNAL
+    ports:
+      - 9092:9092 # kafka broker
+      - 2181:2181 # Zookeeper
+    depends_on:
+      - docker-kdc
+    links:
+      - docker-kdc:docker-kdc
+    networks:
+      - divolte.io
+  # Divolte container
+  docker-divolte:
+    # image: krisgeus/docker-divolte
+    image: docker-divolte
+    container_name: docker-divolte
+    hostname: docker-divolte
+    domainname: divolte_divolte.io
+    environment:
+      DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
+      ENABLE_KERBEROS: "true"
+      REALM: EXAMPLE.COM
+      KDC_HOST: docker-kdc
+      KAFKA_SECURITY_PROTOCOL: SASL_PLAINTEXT
+      KAFKA_SASL_JAAS_CONFIG: |-
+        com.sun.security.auth.module.Krb5LoginModule required
+        useKeyTab=true
+        storeKey=true
+        keyTab="/divolte.keytab"
+        principal="divolte/docker-divolte.divolte_divolte.io";
+    ports:
+      - 8290:8290
+    depends_on:
+      - divolte-kafka
+      - docker-kdc
+    links:
+      - divolte-kafka:divolte-kafka
+      - docker-kdc:docker-kdc
+    networks:
+      - divolte.io
+  
+networks:
+  divolte.io:
+    driver: bridge
