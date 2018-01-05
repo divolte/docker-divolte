@@ -10,23 +10,23 @@ The following environment variables can influence the default configuration:
 | --- | --- | --- | --- |  
 | DIVOLTE_HOST |  |  | Hostname the application binds on |
 | DIVOLTE_PORT  | 8290 |  | The port the application runs on |
-| DIVOLTE\_USE\_XFORWARDED_FOR | false | true, false | Whether to use the X-Forwarded-For header HTTP header |
-| DIVOLTE\_SERVE\_STATIC_RESOURCES | true | true, false | Serve the static testing page |
-| DIVOLTE\_HDFS_ENABLED | false | true, false | write events in avro format to HDFS | 
-| DIVOLTE\_GFS_ENABLED | false | true, false | write events in avro format to GFS | 
-| DIVOLTE\_KAFKA_ENABLED | true | true, false | write events in avro format to Kafka | 
-| DIVOLTE\_KAFKA_\BROKER_LIST | localhost:9092 |  | The kafka bootstrap server list |
-| DIVOLTE\_KAFKA\_CLIENT_ID | divolte.collector |   | The kafka client id for the producer |
-| DIVOLTE\_PARTY_COOKIE | \_dvp |   | Name of the party coockie |
-| DIVOLTE\_PARTY_TIMEOUT | 730 days |   | Validity of the party coockie |
-| DIVOLTE\_SESSION_COOKIE | \_dvs |   | Name of the session coockie |
-| DIVOLTE\_SESSION_TIMEOUT | 30 minutes |   | Validity of the session coockie |
-| DIVOLTE\_COOKIE_DOMAIN | '' |  | The coockie domain for the coockies |
-| DIVOLTE\_JAVASCRIPT_NAME | divolte.js |   | Name of the js file to nclude in the web application |
-| DIVOLTE\_JAVASCRIPT_LOGGING | false | true, false | Enable javascript logging in the console |
-| DIVOLTE\_JAVASCRIPT_DEBUG | false | true, false | Enable javascript debug logging in the console  |
-| DIVOLTE\_JAVASCRIPT\_AUTO\_PAGE\_VIEW_EVENT | true | true, false | Generate the default page view event on loading the js library |
-| DIVOLTE\_KAFKA_TOPIC | divolte |  | The topic where the events are published |
+| DIVOLTE_USE_XFORWARDED_FOR | false | true, false | Whether to use the X-Forwarded-For header HTTP header |
+| DIVOLTE_SERVE_STATIC_RESOURCES | true | true, false | Serve the static testing page |
+| DIVOLTE_HDFS_ENABLED | false | true, false | write events in avro format to HDFS | 
+| DIVOLTE_GFS_ENABLED | false | true, false | write events in avro format to GFS | 
+| DIVOLTE_KAFKA_ENABLED | true | true, false | write events in avro format to Kafka | 
+| DIVOLTE_KAFKA_\BROKER_LIST | localhost:9092 |  | The kafka bootstrap server list |
+| DIVOLTE_KAFKA_CLIENT_ID | divolte.collector |   | The kafka client id for the producer |
+| DIVOLTE_PARTY_COOKIE | _dvp |   | Name of the party coockie |
+| DIVOLTE_PARTY_TIMEOUT | 730 days |   | Validity of the party coockie |
+| DIVOLTE_SESSION_COOKIE | _dvs |   | Name of the session coockie |
+| DIVOLTE_SESSION_TIMEOUT | 30 minutes |   | Validity of the session coockie |
+| DIVOLTE_COOKIE_DOMAIN | '' |  | The coockie domain for the coockies |
+| DIVOLTE_JAVASCRIPT_NAME | divolte.js |   | Name of the js file to nclude in the web application |
+| DIVOLTE_JAVASCRIPT_LOGGING | false | true, false | Enable javascript logging in the console |
+| DIVOLTE_JAVASCRIPT_DEBUG | false | true, false | Enable javascript debug logging in the console  |
+| DIVOLTE_JAVASCRIPT_AUTO_PAGE_VIEW_EVENT | true | true, false | Generate the default page view event on loading the js library |
+| DIVOLTE_KAFKA_TOPIC | divolte |  | The topic where the events are published |
 
 ## Running the container
 ```
