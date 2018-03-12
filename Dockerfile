@@ -14,7 +14,7 @@ RUN mkdir -p /opt/divolte
 #
 # Configuration
 #
-ENV DIVOLTE_VERSION 0.6.0
+ENV DIVOLTE_VERSION 0.7.0
 
 #
 # Download and Install Divolte
