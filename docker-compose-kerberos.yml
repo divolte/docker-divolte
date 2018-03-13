@@ -43,15 +43,19 @@ services:
 
   # Divolte container
   docker-divolte:
-    build: .
+    build:
+      context: .
+      args:
+        ENABLE_KERBEROS: 'yes'
     container_name: docker-divolte
     hostname: docker-divolte
     domainname: divolte_divolte.io
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
-      ENABLE_KERBEROS: "true"
       REALM: EXAMPLE.COM
       KDC_HOST: docker-kdc
+      KADMIN_PRINCIPAL: kadmin/admin
+      KADMIN_PASSWORD: MITiys4K5
       KAFKA_SECURITY_PROTOCOL: SASL_PLAINTEXT
       KAFKA_SASL_JAAS_CONFIG: |-
         com.sun.security.auth.module.Krb5LoginModule required

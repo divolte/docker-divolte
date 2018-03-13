@@ -16,7 +16,7 @@ services:
 
   # Divolte container
   docker-divolte:
-    image: godatadriven/divolte
+    build: .
     environment:
       DIVOLTE_KAFKA_BROKER_LIST: divolte-kafka:9092
     ports:
