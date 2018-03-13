@@ -32,6 +32,7 @@ RUN apt-get update && \
     fi && \
     mkdir -p /opt/divolte && \
     curl -o divolte-collector-${DIVOLTE_VERSION}.tar.gz http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-collector/${DIVOLTE_VERSION}/distributions/divolte-collector-${DIVOLTE_VERSION}.tar.gz && \
+    echo "9a6c81a2290284952389050d039e0b3c9ac31f2af989eec1067b58da12557151  divolte-collector-${DIVOLTE_VERSION}.tar.gz" | sha256sum -c - && \
     tar zxpf divolte-collector-${DIVOLTE_VERSION}.tar.gz -C /opt/divolte && \
     mv /opt/divolte/divolte-collector-${DIVOLTE_VERSION}/ /opt/divolte/divolte-collector && \
     rm -f divolte-collector-${DIVOLTE_VERSION}.tar.gz && \
