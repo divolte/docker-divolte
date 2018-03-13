@@ -4,7 +4,7 @@
 # www.divolte.io
 #
 
-FROM java:8-jre
+FROM openjdk:8-jre-slim
 
 #
 # Prerequisite: Create some folders for later usage
@@ -14,7 +14,21 @@ RUN mkdir -p /opt/divolte
 #
 # Configuration
 #
-ENV DIVOLTE_VERSION 0.7.0
+
+ARG BUILD_DATE
+ARG DIVOLTE_VERSION=0.7.0
+
+LABEL org.label-schema.name="Divolte ${DIVOLTE_VERSION}" \
+      org.label-schema.build-date=$BUILD_DATE \
+      org.label-schema.version=$DIVOLTE_VERSION
+
+#
+# Install dependencies
+#
+
+RUN apt-get update && \
+	apt-get install -y curl krb5-user && \ 
+	apt-get clean -y
 
 #
 # Download and Install Divolte
@@ -30,13 +44,6 @@ ADD conf/divolte-collector.conf /opt/divolte/divolte-collector/conf/divolte-coll
 ADD conf/logback.xml /opt/divolte/divolte-collector/conf/logback.xml
 RUN chown root:root /opt/divolte/divolte-collector/conf/divolte-collector.conf && \
     chown root:root /opt/divolte/divolte-collector/conf/logback.xml
-
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -qqy apt-transport-https locales krb5-user netcat && apt-get -qq clean
-
-RUN locale-gen "en_US.UTF-8"
-RUN echo "LC_ALL=\"en_US.UTF-8\"" >> /etc/default/locale
 
 ENV KDC_HOST=${KDC_HOST:-kdc-kadmin}
 ENV REALM ${REALM:-EXAMPLE.COM}

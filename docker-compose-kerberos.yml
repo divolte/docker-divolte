@@ -2,7 +2,7 @@ version: "3.3"
 services:
   # Kafka/Zookeeper container
   docker-kdc:
-    image: docker-kdc
+    image: krisgeus/docker-kdc
     container_name: docker-kdc
     hostname: docker-kdc
     domainname: divolte_divolte.io
@@ -16,9 +16,9 @@ services:
       - /dev/urandom:/dev/random
     networks:
       - divolte.io
+
   divolte-kafka:
-    # image: krisgeus/docker-kafka
-    image: docker-kafka
+    image: krisgeus/docker-kafka
     container_name: divolte-kafka
     hostname: divolte-kafka
     domainname: divolte_divolte.io
@@ -36,19 +36,14 @@ services:
       LISTENERS: SASL_PLAINTEXT://0.0.0.0:9092,INTERNAL://0.0.0.0:9093
       SECURITY_PROTOCOL_MAP: SASL_PLAINTEXT:SASL_PLAINTEXT,INTERNAL:PLAINTEXT
       INTER_BROKER: INTERNAL
-    ports:
-      - 9092:9092 # kafka broker
-      - 2181:2181 # Zookeeper
     depends_on:
       - docker-kdc
-    links:
-      - docker-kdc:docker-kdc
     networks:
       - divolte.io
+
   # Divolte container
   docker-divolte:
-    # image: krisgeus/docker-divolte
-    image: docker-divolte
+    build: .
     container_name: docker-divolte
     hostname: docker-divolte
     domainname: divolte_divolte.io
