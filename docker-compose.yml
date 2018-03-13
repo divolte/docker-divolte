@@ -36,7 +36,7 @@ services:
       - divolte-kafka:divolte-kafka
     networks:
       - divolte.io
-  
+
 networks:
   divolte.io:
     driver: bridge

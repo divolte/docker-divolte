@@ -1,13 +1,13 @@
 # Divolte Base image
 
-Base image with [divolte](http://divolte.io).
+Base image with [Divolte](http://divolte.io).
 
 ## Configuration options
 
 The following environment variables can influence the default configuration:
 
 |env var|default|options|description|
-| --- | --- | --- | --- |  
+| --- | --- | --- | --- |
 | DIVOLTE_HOST |  |  | Hostname the application binds on |
 | DIVOLTE_PORT  | 8290 |  | The port the application runs on |
 | DIVOLTE_USE_XFORWARDED_FOR | false | true, false | Whether to use the X-Forwarded-For header HTTP header |
@@ -40,7 +40,7 @@ Testing if the image works can be done by using the kafka console producer/consu
 since we named the image we need to add an entry to the `/etc/hosts` file to connect the name divolte-kafka to the local ip 127.0.0.1
 
 ```
-127.0.0.1	divolte-kafka
+127.0.0.1       divolte-kafka
 ```
 
 Now we can use that hostname (the same as the advertised host) to connect the producer and consumer
@@ -62,7 +62,7 @@ To consume this use the following in a separate terminal window
 kafka-console-consumer --bootstrap-server divolte-kafka:9092 \
   --topic divolte \
   --from-beginning
-  
+
 message1
 message2
 ```
