@@ -25,12 +25,12 @@ LABEL org.label-schema.name="Divolte ${DIVOLTE_VERSION}" \
 #
 
 RUN apt-get update && \
-	if [ "$ENABLE_KERBEROS" = "yes" ]; then\
-		apt-get install -y curl krb5-user;\
-	else\
-		apt-get install -y curl;\
-	fi && \
-	mkdir -p /opt/divolte && \
+    if [ "$ENABLE_KERBEROS" = "yes" ]; then\
+        apt-get install -y curl krb5-user;\
+    else\
+        apt-get install -y curl;\
+    fi && \
+    mkdir -p /opt/divolte && \
     curl -o divolte-collector-${DIVOLTE_VERSION}.tar.gz http://divolte-releases.s3-website-eu-west-1.amazonaws.com/divolte-collector/${DIVOLTE_VERSION}/distributions/divolte-collector-${DIVOLTE_VERSION}.tar.gz && \
     tar zxpf divolte-collector-${DIVOLTE_VERSION}.tar.gz -C /opt/divolte && \
     mv /opt/divolte/divolte-collector-${DIVOLTE_VERSION}/ /opt/divolte/divolte-collector && \

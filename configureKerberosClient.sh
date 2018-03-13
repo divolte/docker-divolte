@@ -18,16 +18,16 @@ echo "==== /etc/krb5.conf ======================================================
 echo "==================================================================================="
 tee /etc/krb5.conf <<EOF
 [libdefaults]
-	default_realm = $REALM
-	dns_canonicalize_hostname = false
-	dns_lookup_realm = false
- 	dns_lookup_kdc = false
+    default_realm = $REALM
+    dns_canonicalize_hostname = false
+    dns_lookup_realm = false
+    dns_lookup_kdc = false
 
 [realms]
-	$REALM = {
-		kdc = ${KDC_HOST}
-		admin_server = ${KDC_HOST}
-	}
+    $REALM = {
+        kdc = ${KDC_HOST}
+        admin_server = ${KDC_HOST}
+    }
 EOF
 echo ""
 
