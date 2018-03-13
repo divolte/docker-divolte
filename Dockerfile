@@ -42,8 +42,7 @@ RUN apt-get update && \
 #
 # Configuration changes using divolte-collector.conf
 #
-ADD conf/divolte-collector.conf /opt/divolte/divolte-collector/conf/divolte-collector.conf
-ADD conf/logback.xml /opt/divolte/divolte-collector/conf/logback.xml
+COPY conf/ /opt/divolte/divolte-collector/conf/
 
 COPY configureKerberosClient.sh /opt/divolte/
 COPY start.sh /opt/divolte/
