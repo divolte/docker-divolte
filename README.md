@@ -15,7 +15,7 @@ The following environment variables can influence the default configuration:
 | DIVOLTE_HDFS_ENABLED | false | true, false | write events in avro format to HDFS | 
 | DIVOLTE_GFS_ENABLED | false | true, false | write events in avro format to GFS | 
 | DIVOLTE_KAFKA_ENABLED | true | true, false | write events in avro format to Kafka | 
-| DIVOLTE_KAFKA_\BROKER_LIST | localhost:9092 |  | The kafka bootstrap server list |
+| DIVOLTE_KAFKA_BROKER_LIST | localhost:9092 |  | The kafka bootstrap server list |
 | DIVOLTE_KAFKA_CLIENT_ID | divolte.collector |   | The kafka client id for the producer |
 | DIVOLTE_PARTY_COOKIE | _dvp |   | Name of the party coockie |
 | DIVOLTE_PARTY_TIMEOUT | 730 days |   | Validity of the party coockie |
