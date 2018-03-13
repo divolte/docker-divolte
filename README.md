@@ -1,28 +1,28 @@
 # Divolte Base image
 
-Base image with [divolte](http://divolte.io).
+Base image with [Divolte](http://divolte.io).
 
 ## Configuration options
 
 The following environment variables can influence the default configuration:
 
 |env var|default|options|description|
-| --- | --- | --- | --- |  
+| --- | --- | --- | --- |
 | DIVOLTE_HOST |  |  | Hostname the application binds on |
 | DIVOLTE_PORT  | 8290 |  | The port the application runs on |
-| DIVOLTE_USE_XFORWARDED_FOR | false | true, false | Whether to use the X-Forwarded-For header HTTP header |
+| DIVOLTE_USE_XFORWARDED_FOR | false | true, false | Whether to trust the X-Forwarded-For header HTTP header |
 | DIVOLTE_SERVE_STATIC_RESOURCES | true | true, false | Serve the static testing page |
-| DIVOLTE_HDFS_ENABLED | false | true, false | write events in avro format to HDFS | 
-| DIVOLTE_GFS_ENABLED | false | true, false | write events in avro format to GFS | 
-| DIVOLTE_KAFKA_ENABLED | true | true, false | write events in avro format to Kafka | 
-| DIVOLTE_KAFKA_\BROKER_LIST | localhost:9092 |  | The kafka bootstrap server list |
-| DIVOLTE_KAFKA_CLIENT_ID | divolte.collector |   | The kafka client id for the producer |
-| DIVOLTE_PARTY_COOKIE | _dvp |   | Name of the party coockie |
-| DIVOLTE_PARTY_TIMEOUT | 730 days |   | Validity of the party coockie |
-| DIVOLTE_SESSION_COOKIE | _dvs |   | Name of the session coockie |
-| DIVOLTE_SESSION_TIMEOUT | 30 minutes |   | Validity of the session coockie |
-| DIVOLTE_COOKIE_DOMAIN | '' |  | The coockie domain for the coockies |
-| DIVOLTE_JAVASCRIPT_NAME | divolte.js |   | Name of the js file to nclude in the web application |
+| DIVOLTE_HDFS_ENABLED | false | true, false | Write events in avro format to HDFS |
+| DIVOLTE_GFS_ENABLED | false | true, false | Write events in avro format to GFS |
+| DIVOLTE_KAFKA_ENABLED | true | true, false | Write events in avro format to Kafka |
+| DIVOLTE_KAFKA_BROKER_LIST | localhost:9092 |  | The Kafka bootstrap server list |
+| DIVOLTE_KAFKA_CLIENT_ID | divolte.collector |   | The Kafka client id for the producer |
+| DIVOLTE_PARTY_COOKIE | \_dvp |   | Name of the party cookie |
+| DIVOLTE_PARTY_TIMEOUT | 730 days |   | Validity of the party cookie |
+| DIVOLTE_SESSION_COOKIE | \_dvs |   | Name of the session cookie |
+| DIVOLTE_SESSION_TIMEOUT | 30 minutes |   | Validity of the session cookie |
+| DIVOLTE_COOKIE_DOMAIN | '' |  | The cookie domain for the cookies |
+| DIVOLTE_JAVASCRIPT_NAME | divolte.js |   | Name of the js file to include in the web application |
 | DIVOLTE_JAVASCRIPT_LOGGING | false | true, false | Enable javascript logging in the console |
 | DIVOLTE_JAVASCRIPT_DEBUG | false | true, false | Enable javascript debug logging in the console  |
 | DIVOLTE_JAVASCRIPT_AUTO_PAGE_VIEW_EVENT | true | true, false | Generate the default page view event on loading the js library |
@@ -36,41 +36,40 @@ docker-compose --project-name divolte up
 
 ## Testing
 
-Testing if the image works can be done by using the kafka console producer/consumer
-since we named the image we need to add an entry to the `/etc/hosts` file to connect the name divolte-kafka to the local ip 127.0.0.1
+Testing if the image works can be done by using the Kafka console producer/consumer
+since we named the image we need to add an entry to the `/etc/hosts` file to connect the name `divolte-kafka` to the local ip `127.0.0.1`:
 
 ```
-127.0.0.1	divolte-kafka
+127.0.0.1       divolte-kafka
 ```
 
-Now we can use that hostname (the same as the advertised host) to connect the producer and consumer
+Now we can use that hostname (the same as the advertised host) to connect the producer and consumer:
 
 ```
 kafka-console-producer --broker-list divolte-kafka:9092 \
   --topic divolte
 ```
 
-Sending messages can be done by typeing the following in the console
+Sending messages can be done by typeing the following in the console:
 ```
 message1
 message2
 ```
 
-To consume this use the following in a separate terminal window
-
+To consume this use the following in a separate terminal window:
 ```
 kafka-console-consumer --bootstrap-server divolte-kafka:9092 \
   --topic divolte \
   --from-beginning
-  
+
 message1
 message2
 ```
 
 ## Divolte test page
 
-open the page `http://localhost:8290` in your browser. A pageview event is sent onload. If you click the button a custom event is sent to divolte.
-If you still have the console consumer running you should see the avro encoded message passig by. Something like this:
+Open the page `http://localhost:8290` in your browser. A pageview event is sent onload. If you click the button a custom event is sent to divolte.
+If you still have the console consumer running you should see the Avro-encoded message passing by. Something like this:
 
 ```
 ?ĖԞW?ĖԞW192.168.0.1,http://localhost:8290/??
@@ -85,8 +84,8 @@ If you still have the console consumer running you should see the avro encoded m
 
 ## Kerberos
 
-If you want to have a kerberozed kafka cluster use the docker-compose-kerberos file to spin up the images.
-You need to provide the projectname `divolte` for it to work
+If you want to have a Kerberized Kafka cluster use the `docker-compose-kerberos` file to spin up the images.
+You need to provide the projectname `divolte` for it to work:
 
 ```
 docker-compose --project-name divolte -f docker-compose-kerberos.yml up
