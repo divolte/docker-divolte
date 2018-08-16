@@ -13,6 +13,10 @@ The following environment variables can influence the default configuration:
 | DIVOLTE_USE_XFORWARDED_FOR | false | true, false | Whether to trust the X-Forwarded-For header HTTP header |
 | DIVOLTE_SERVE_STATIC_RESOURCES | true | true, false | Serve the static testing page |
 | DIVOLTE_HDFS_ENABLED | false | true, false | Write events in avro format to HDFS |
+| DIVOLTE_HDFS_SINK_SYNC_NR_OF_RECORDS | 1000 |  | Max nr of records before file is synced |
+| DIVOLTE_HDFS_SINK_SYNC_DURATION | 30 minutes | a duration | Max duration before file is synced |
+| DIVOLTE_HDFS_SINK_WORKING_DIR | /tmp/working |  | HDFS working directory path |
+| DIVOLTE_HDFS_SINK_PUBLISH_DIR | /tmp/publish |  | HDFS publish directory path |
 | DIVOLTE_GFS_ENABLED | false | true, false | Write events in avro format to GFS |
 | DIVOLTE_KAFKA_ENABLED | true | true, false | Write events in avro format to Kafka |
 | DIVOLTE_KAFKA_BROKER_LIST | localhost:9092 |  | The Kafka bootstrap server list |
